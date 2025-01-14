@@ -1,0 +1,62 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: manage_products_db
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=manage_products
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=root
+    networks:
+      - manage_products_network
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: manage_products_backend
+    env_file:
+      - .env
+    environment:
+      - DEBUG=True
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=manage_products
+      - DB_USERNAME=admin
+      - DB_PASSWORD=root
+    volumes:
+      - ./backend:/var/www/
+    ports:
+    - "8000:80"
+    depends_on:
+      - mysql
+    networks:
+      - manage_products_network
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: manage_products_frontend
+    volumes:
+      - ./frontend:/app
+      - ./frontend/src:/app/src
+    ports:
+      - "80:80"
+    networks:
+      - manage_products_network
+
+networks:
+  manage_products_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
