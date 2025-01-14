@@ -9,7 +9,7 @@
 **Clone o repositório utilizando o comando abaixo:**
 
 ```bash
-git clone https://github.com/andresonmalaquias/cme.git
+git clone https://github.com/andresonmalaquias/manage_products.git
 ```
 
 ### **Variáveis de Ambiente**
