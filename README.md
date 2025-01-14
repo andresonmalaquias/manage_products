@@ -24,6 +24,14 @@ git clone https://github.com/andresonmalaquias/cme.git
 docker-compose up --build -d
 ```
 
+### **Instalando Dependências**
+
+**Utilize o composer para instalar as dependências:**
+
+```bash
+docker exec -it manage_products_backend composer install
+```
+
 ### **Executando Migrações**
 
 **Aplique as migrações do banco de dados com o comando:**
@@ -32,7 +40,7 @@ docker-compose up --build -d
 docker exec -it manage_products_backend php artisan migrate
 ```
 
-## 🔑 **Usuário Padrão Criado**
+##  **Usuário Padrão Criado**
 
 Após configurar o ambiente, você pode acessar com as seguintes credenciais padrão:
 
